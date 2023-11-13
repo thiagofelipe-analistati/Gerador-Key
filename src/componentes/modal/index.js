@@ -1,12 +1,16 @@
 import { View, StyleSheet, Text, TouchableOpacity, Pressable} from "react-native"
 import * as Clipboard from 'expo-clipboard'
+import useStorage from '../../hooks/useStorage'
 
 export default function ModalPassword( {password, handleClose}){
-async function handleCopyPassword(){
-    await Clipboard.setStringAsync(password)
-    alert("Senha Copiada!")
-    handleClose();
-}
+    const { getItem,saveItem, removeItem} = useStorage();
+
+    async function handleCopyPassword(){
+        await Clipboard.setStringAsync(password)
+        await saveItem("@pass", password)
+        alert("Senha Copiada!")
+        handleClose();
+    }
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -18,7 +22,7 @@ async function handleCopyPassword(){
                     <TouchableOpacity style={styles.button} onPress={handleClose}>
                         <Text  style={styles.buttonText}> Voltar</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity  style={[styles.button, styles.buttonSave]}>
+                    <TouchableOpacity  style={[styles.button, styles.buttonSave]} onPress={handleCopyPassword}>
                         <Text style={styles.buttonSaveText}> salvar</Text>
                     </TouchableOpacity>
                 </View>
