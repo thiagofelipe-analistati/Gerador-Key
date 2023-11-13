@@ -8,12 +8,10 @@ import { useState } from 'react';
 let charset= "abcefghijlmnopqrstuvxz123456789"
 
 export  function Home() {
-
   const [size,setSize] = useState(6)
   const [passwordValue, setPasswordVaue] = useState ("")
-
   const [modalVisible, setModalVisible] = useState(false)  
-  
+
   function generatepassword (){
     let password = "";
     for(let i= 0, n = charset.length; i< size; i++){
@@ -22,7 +20,7 @@ export  function Home() {
     setPasswordVaue(password)
     setModalVisible(true);
   }
-
+  
   return (
     <View style={styles.container}>
       <Image  

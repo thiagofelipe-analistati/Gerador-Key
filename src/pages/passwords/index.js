@@ -21,7 +21,7 @@ export function Passwords (){
     async function handleDeletePassword(item){
         try {
             const passwords =  await removeItem("@pass", item)
-            setListPassword(const passwords =  await removeItem("@pass", item))
+            setListPassword( passwords )
         } catch (error) {
             console.log("erro", error)
         }
